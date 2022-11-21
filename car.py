@@ -23,5 +23,8 @@ class Car():
 
         self.screen.blit(rot_car, rot_rect)
 
-
-
+    def move_car(self):
+        if self.moving_up:
+            self.rect.y += 1
+        if self.moving_down:
+            self.rect.y -= 1
