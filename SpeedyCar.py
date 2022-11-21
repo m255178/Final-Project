@@ -12,6 +12,8 @@ WINDOW_HEIGHT = 8 * TILE_SIZE
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 bg = draw_background((WINDOW_WIDTH, WINDOW_HEIGHT))
+bgX = 0
+bgX2 = bg.get_width()
 
 car = Car(screen)
 
@@ -20,6 +22,7 @@ clock = pygame.time.Clock()
 
 def redraw_window():
     screen.blit(bg, (bgX, 0))
+    screen.blit(bg, (bgX2, 0))
     pygame.display.update()
 
 
@@ -44,11 +47,14 @@ while True:
                 car.moving_up = False
             elif event.key == pygame.K_DOWN:
                 car.moving_down = False
-
+        print(event)
     clock.tick(speed)
-    bgX = -1.4
+    bgX = -4
+    bgX2 = -4
     if bgX < bg.get_width() * -1:
         bgX = bg.get_width()
+    if bgX2 < bg.get_width() * -1:
+        bgX2 = bg.get_width()
 
     redraw_window()
 
@@ -57,5 +63,5 @@ while True:
     screen.blit(bg, bg.get_rect())
 
     car.draw()
-
+    car.move_car()
     pygame.display.flip()

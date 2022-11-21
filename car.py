@@ -2,7 +2,7 @@ import pygame
 
 
 class Car():
-    def __init__(self,screen):
+    def __init__(self, screen):
         self.image = pygame.image.load('images/car_blue_3.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (30, 65))
         self.rect = self.image.get_rect()
@@ -25,6 +25,6 @@ class Car():
 
     def move_car(self):
         if self.moving_up:
-            self.rect.y += 1
+            self.y -= 3
         if self.moving_down:
-            self.rect.y -= 1
+            self.y += 3
