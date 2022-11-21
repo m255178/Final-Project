@@ -25,6 +25,6 @@ class Car():
 
     def move_car(self):
         if self.moving_up:
-            self.y -= 3
+            self.y -= 7
         if self.moving_down:
-            self.y += 3
+            self.y += 7

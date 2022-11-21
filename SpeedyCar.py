@@ -51,7 +51,7 @@ while True:
     while i < tiles:
         screen.blit(bg, (bg.get_width()*i + scroll, 0))
         i += 1
-    scroll -= 6
+    scroll -= 10
     if abs(scroll) > bg.get_width():
         scroll = 0
 
