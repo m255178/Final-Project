@@ -16,11 +16,11 @@ grid = [
 TILE_SIZE = 128
 
 # 0 is grass, 1 is grass/dirt, 2 is topside of track, 3 is bottom side of track, 4 is stands
-grass = pygame.image.load(os.path.join('images/land_grass11.png')).convert()
-grass_dirt = pygame.image.load('images/land_grass13.png')
-track1 = pygame.image.load('images/road_asphalt04.png')
-track2 = pygame.image.load('images/road_asphalt40.png')
-stands = pygame.image.load('images/tribune_full.png')
+grass = pygame.image.load(os.path.join('images/land_grass11.png'))
+grass_dirt = pygame.image.load(os.path.join('images/land_grass13.png'))
+track1 = pygame.image.load(os.path.join('images/road_asphalt04.png'))
+track2 = pygame.image.load(os.path.join('images/road_asphalt40.png'))
+stands = pygame.image.load(os.path.join('images/tribune_full.png'))
 stands = pygame.transform.scale(stands, (128,128))
 
 ground = [grass, grass_dirt, track1, track2, stands]
