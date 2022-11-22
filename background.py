@@ -1,7 +1,6 @@
 import pygame
 import os
 
-
 grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
@@ -11,7 +10,7 @@ grid = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]
-    ]
+]
 
 TILE_SIZE = 128
 
@@ -21,9 +20,10 @@ grass_dirt = pygame.image.load(os.path.join('images/land_grass13.png'))
 track1 = pygame.image.load(os.path.join('images/road_asphalt04.png'))
 track2 = pygame.image.load(os.path.join('images/road_asphalt40.png'))
 stands = pygame.image.load(os.path.join('images/tribune_full.png'))
-stands = pygame.transform.scale(stands, (128,128))
+stands = pygame.transform.scale(stands, (128, 128))
 
 ground = [grass, grass_dirt, track1, track2, stands]
+
 
 def draw_background(bg_size):
     bg = pygame.Surface(bg_size)
@@ -31,5 +31,3 @@ def draw_background(bg_size):
         for c, grid_element in enumerate(grid_list):
             bg.blit(ground[grid_element], (c * TILE_SIZE, r * TILE_SIZE))
     return bg
-
-

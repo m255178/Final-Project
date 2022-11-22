@@ -19,9 +19,6 @@ car = Car(screen)
 
 clock = pygame.time.Clock()
 
-
-
-
 while True:
 
     for event in pygame.event.get():
@@ -41,22 +38,23 @@ while True:
                 car.moving_down = False
         print(event)
 
-
     pygame.display.set_caption("Speedy Car")
-
 
     clock.tick(33)
 
     i = 0
     while i < tiles:
-        screen.blit(bg, (bg.get_width()*i + scroll, 0))
+        screen.blit(bg, (bg.get_width() * i + scroll, 0))
         i += 1
     scroll -= 10
     if abs(scroll) > bg.get_width():
         scroll = 0
 
-    pygame.display.update()
 
     car.draw()
     car.move_car()
+
+    pygame.display.update()
+
+
     pygame.display.flip()
