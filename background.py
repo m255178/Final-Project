@@ -1,6 +1,7 @@
 import pygame
 import os
 
+# create matrix grid for images for background
 grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
@@ -12,6 +13,7 @@ grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]
 ]
 
+# set tile size
 TILE_SIZE = 128
 
 # 0 is grass, 1 is grass/dirt, 2 is topside of track, 3 is bottom side of track, 4 is stands
@@ -22,9 +24,11 @@ track2 = pygame.image.load(os.path.join('images/road_asphalt40.png'))
 stands = pygame.image.load(os.path.join('images/tribune_full.png'))
 stands = pygame.transform.scale(stands, (128, 128))
 
+# list of images to loop through
 ground = [grass, grass_dirt, track1, track2, stands]
 
 
+# loop through the list of images and the list of lists to make a continuous background
 def draw_background(bg_size):
     bg = pygame.Surface(bg_size)
     for r, grid_list in enumerate(grid):

@@ -1,9 +1,9 @@
 import pygame
 
 
-class Car:
+class Car_2:
     def __init__(self, screen):
-        self.image = pygame.image.load('images/car_blue_3.png').convert_alpha()
+        self.image = pygame.image.load('images/car_red_5.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (30, 65))
         self.rect = self.image.get_rect()
         self.x = 750
