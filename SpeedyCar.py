@@ -31,37 +31,45 @@ car2 = Car_2(screen)
 # timer for scrolling background
 clock = pygame.time.Clock()
 
+# make a group for obstacles
 obstacle_group = pygame.sprite.Group()
 
+# make a bunch of cones using a counter with random x and y positions
 counter = 0
 x = 450
-while counter < 5:
-    y = random.randint(400,620)
-    cone = Cones(screen, 1565,y)
+while counter < 50:
+    x = random.randint(1560, 10000)
+    y = random.randint(400, 620)
+    cone = Cones(screen, x, y)
     obstacle_group.add(cone)
     counter = counter + 1
 
-
-
-
-achievement = Achievement(screen)
+# make a group for achievements
 achievement_group = pygame.sprite.Group()
-achievement_group.add(achievement)
+# make achievements using counter with random x and y positions
+while counter < 100:
+    x = random.randint(1560, 10000)
+    y = random.randint(400, 620)
+    achievement = Achievement(screen, x, y)
+    achievement_group.add(achievement)
+    counter = counter + 1
 
 # create wall group
 wall_group = pygame.sprite.Group()
 
 # create a main group for sprite groups
-main_group = pygame.sprite.Group()
+
 # draw horizontal barriers along the track for the cars
 for x in range(0, WINDOW_WIDTH, TILE_SIZE):
     for y in (400, 620):
         wall = Wall((x, y))
         wall_group.add(wall)
 
+# initialize music for tire screeches
 pygame.mixer.init()
 pygame.mixer.music.load('tires.mp3')
 
+# set a font for the game over page
 font = pygame.font.SysFont('Helvetica', 80)
 
 # main game loop
@@ -74,18 +82,21 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
                 sys.exit()
+            # up and down arrows for moving blue car up and down
             elif event.key == pygame.K_UP:
                 car.moving_up = True
                 pygame.mixer.music.play()
             elif event.key == pygame.K_DOWN:
                 car.moving_down = True
                 pygame.mixer.music.play()
+            # w and s keys for moving red car up and down
             elif event.key == pygame.K_w:
                 car2.moving_up = True
                 pygame.mixer.music.play()
             elif event.key == pygame.K_s:
                 car2.moving_down = True
                 pygame.mixer.music.play()
+        # make sure the cars stop moving when buttons are released
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 car.moving_up = False
@@ -100,9 +111,11 @@ while True:
                 car2.moving_down = False
                 pygame.mixer.music.stop()
 
+    # window caption
     pygame.display.set_caption("Speedy Car")
 
-
+    # use a clock tick for the speed of background movement and obstacle movement
+    clock.tick(40)
 
     # scrolling the screen constantly
     i = 0
@@ -117,29 +130,31 @@ while True:
     car.draw()
     car2.draw()
 
-    for cone in obstacle_group:
-        cone.x = cone.x - 10
-        cone.draw(screen)
-
-    x -= 1
-    clock.tick(60)
-
-
-    # call update_car()
+    # call car.update() to check for collisions and to move car up and down
     car.update(wall_group, obstacle_group, achievement_group)
     car2.update(wall_group, obstacle_group, achievement_group)
 
+    # draw barriers
     wall_group.draw(screen)
 
-    achievement.draw()
-    achievement.update()
+    # draw the cones using a for loop
+    for cone in obstacle_group:
+        cone.x = cone.x - 10
+        cone.draw()
 
-    # call the main group
-    main_group.add(wall_group)
-    main_group.add(obstacle_group)
+    # draw the achievments using a for loop
+    for achievement in achievement_group:
+        achievement.x = achievement.x - 10
+        achievement.draw()
 
+    # this is for counting for loops
+    x -= 1
+
+
+    # game over page if car 1 or car 2 gets to the end of the track
     if car.x == 0 or car2.x == 0:
         while True:
+            # set up a screen
             screen.fill((0, 81, 255))
             img = font.render(
                 f"GAME OVER - Press Q", True, (255, 255, 255))
@@ -150,6 +165,7 @@ while True:
             screen.blit(img, img_rect)
             pygame.display.flip()
             clock.tick()
+            # press q or the X to quit
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -161,4 +177,5 @@ while True:
 
     pygame.display.update()
 
+    # flip the display
     pygame.display.flip()

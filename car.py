@@ -1,13 +1,14 @@
 import pygame
-from time import sleep
 
 
 class Car(pygame.sprite.Sprite):
     def __init__(self, screen):
         pygame.sprite.Sprite.__init__(self)
+        # upload the image
         self.image = pygame.image.load('images/car_blue_3.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (30, 65))
         self.rect = self.image.get_rect()
+        # set x and y so that the car starts in the middle of the window
         self.x = 750
         self.y = 500
         self.screen = screen
@@ -30,12 +31,12 @@ class Car(pygame.sprite.Sprite):
 
     def update(self, wall_group, obstacle_group, achievement_group):
         # move the car up and down
-        old_rect = self.rect
-        intY = int(self.y)
         if self.moving_up:
             self.y -= 7
         if self.moving_down:
             self.y += 7
+
+        # check to see if the car collides with the wall, obstacles, or achievements
         if pygame.sprite.spritecollide(self, wall_group, False):
             # go back to the old rectangle
             self.x -= 5

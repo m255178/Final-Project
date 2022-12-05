@@ -1,5 +1,5 @@
 import pygame
-
+# all code is basically the same as original car.py
 
 class Car_2:
     def __init__(self, screen):
@@ -26,14 +26,11 @@ class Car_2:
 
     def update(self, wall_group, obstacle_group, achievement_group):
         # move the car up and down
-        old_rect = self.rect
-        intY = int(self.y)
         if self.moving_up:
             self.y -= 7
         if self.moving_down:
             self.y += 7
         if pygame.sprite.spritecollide(self, wall_group, False):
-            # go back to the old rectangle
             self.x -= 5
         if pygame.sprite.spritecollide(self, obstacle_group, False):
             self.x -= 10
