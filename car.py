@@ -1,8 +1,10 @@
 import pygame
+from time import sleep
 
 
-class Car:
+class Car(pygame.sprite.Sprite):
     def __init__(self, screen):
+        pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('images/car_blue_3.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (30, 65))
         self.rect = self.image.get_rect()
@@ -23,10 +25,22 @@ class Car:
         rot_rect = rot_car.get_rect(center=self.rect.center)
         # blit the car
         self.screen.blit(rot_car, rot_rect)
+        if self.x == 1400:
+            self.draw()
 
-    def move_car(self):
+    def update(self, wall_group, obstacle_group, achievement_group):
         # move the car up and down
+        old_rect = self.rect
+        intY = int(self.y)
         if self.moving_up:
             self.y -= 7
         if self.moving_down:
             self.y += 7
+        if pygame.sprite.spritecollide(self, wall_group, False):
+            # go back to the old rectangle
+            self.x -= 5
+        if pygame.sprite.spritecollide(self, obstacle_group, False):
+            self.x -= 10
+        if pygame.sprite.spritecollide(self, achievement_group, False):
+            self.x += 10
+
